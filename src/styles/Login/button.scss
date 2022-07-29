@@ -19,8 +19,5 @@
 @media screen and (max-width: 612px) {
     #auth-button {
         border-radius: 0.7em;
-        position: absolute;
-        top: calc(100vh - 5em);
-        width: calc(100% - 2em);
     }
 }

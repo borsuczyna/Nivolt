@@ -14,7 +14,10 @@ function Auth() {
                 <img src={Logo} alt="logo" id="brand-logo"/>
             </Top>
             <Form>
-
+                Username
+                <Input placeholder="Username"/>
+                Password
+                <Input placeholder="Password"/>
             </Form>
             <Button>LOGIN</Button>
         </Block>

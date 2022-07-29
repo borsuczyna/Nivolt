@@ -5,6 +5,7 @@
     height: 28em;
     border-radius: 1.5em;
     border: 1px solid rgba(21, 21, 21, 0.3);
+    overflow: hidden;
 }
 
 #auth-inner {
@@ -34,5 +35,6 @@
         margin-top: 10%;
         height: 90%;
         padding: 1em;
+        z-index: 1;
     }
 }
