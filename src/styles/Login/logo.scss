@@ -1,0 +1,14 @@
+#brand-logo {
+    width: 35%;
+    position: absolute;
+    left: 50%;
+    top: 2em;
+    transform: translateX(-50%);
+    filter: drop-shadow(0 0 0.5em rgba(0, 0, 0, 0.1));
+}
+
+@media screen and (max-width: 612px) {
+    #brand-logo {
+        width: 10em;
+    }
+}

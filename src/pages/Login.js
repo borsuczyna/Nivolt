@@ -1,5 +1,6 @@
 import '../App.scss';
-import '../styles/login.scss';
+import '../styles/main.scss';
+import '../styles/Login/main.scss';
 
 import Auth from '../components/Auth/Main.js';
 
