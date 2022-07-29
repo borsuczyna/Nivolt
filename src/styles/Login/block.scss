@@ -2,14 +2,12 @@
     background-color: rgba(19, 19, 19, 0.4);
     backdrop-filter: blur(50px);
     width: 23em;
-    height: 28em;
     border-radius: 1.5em;
     border: 1px solid rgba(21, 21, 21, 0.3);
-    // overflow: hidden;
+    overflow: hidden;
 }
 
 #auth-inner {
-    height: 28em;
     display: flex;
     flex-direction: column;
 }
@@ -27,22 +25,40 @@
 #auth-forgot-password {
     margin-top: 1em;
     // background-color: rgba(255, 0, 0, 0.315);
+    display: block;
     color: white;
     text-align: center;
     text-decoration: underline;
+    opacity: 0.5;
 }
 
 @media screen and (max-width: 612px) {
+    #auth-main {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100vw;
+        height: 100vh !important;
+    }
+
     #auth-block {
-        width: 100%;
-        height: 100%;
+        width: 99vw;
+        height: 99vh !important;
         border-radius: 0;
     }
 
     #auth-inner {
         margin-top: 10%;
-        height: 90%;
+        height: 90% !important;
         padding: 1em;
         z-index: 1;
+    }
+
+    #auth-forgot-password {
+        position: absolute;
+        top: calc(25em);
+        left: 50%;
+        transform: translateX(-50%);
+        display: none;
     }
 }
