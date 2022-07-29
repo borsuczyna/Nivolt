@@ -1,6 +1,9 @@
 import Block from './Block';
 import Waves from './Waves';
 import Top from './Top';
+import Form from './Form';
+import Button from './Button';
+import Input from './Input';
 import Logo from '../../img/logo.png';
 
 function Auth() {
@@ -10,6 +13,10 @@ function Auth() {
                 <Waves/>
                 <img src={Logo} alt="logo" id="brand-logo"/>
             </Top>
+            <Form>
+
+            </Form>
+            <Button>LOGIN</Button>
         </Block>
     )
 }
