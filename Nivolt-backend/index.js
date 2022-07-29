@@ -15,3 +15,4 @@ app.all('/', wrongReqeust);
 require('./src/config.js');
 require('./src/db.js');
 require('./src/account.js');
+require('./src/guilds.js');
