@@ -3,8 +3,16 @@ const jwt = require('jsonwebtoken');
 const config = require('./config');
 const md5 = require('md5');
 
-class UserLogin{
-    constructor (usernameOrEmail, password){
+class User {
+    constructor (){
+        this.username = null;
+        this.email = null;
+        this.password = null;
+        this.createdAt = null;
+        this.updatedAt = null;
+    };
+
+    async login(usernameOrEmail, password) {
         if(!usernameOrEmail || !password){
             return "Please fill out all data";
         };
@@ -18,7 +26,7 @@ class UserLogin{
             return "only arabic characters are accepted";
         };
 
-        new Promise((resolve, reject) => {
+        return new Promise((resolve, reject) => {
             db.query("SELECT `id`, `username`, `password` FROM `users` WHERE " + fieldSearch + "=?", [usernameOrEmail], (err, res) => {
                 if(err) reject(err);
                 
@@ -31,51 +39,51 @@ class UserLogin{
                 };
             });
         });
-    };
-};
+    }
 
-const accountLogin = new UserLogin("j@gmail.com", '123456');
-
-class UserRegister{
-    constructor(username, password, confirmPassword, email){
-        if(!username || !password || !confirmPassword || !email){
-            console.log("No arguments");
-            return;
-        };
-
-        if(password != confirmPassword){
-            return console.log("Password are not the same");
-        }
-
-        if(!config.onlyArabic(username)){
-            return console.log("only arabic characters are accepted");
+    async register(username, email, password) {
+        if(!username || !email || !password){
+            return "Please fill out all data";
         };
 
         if(!config.validateEmail(email)){
-            return console.log("Please enter an valid e-mail!");
+            return "Please enter a valid email";
         }
 
-        db.query("SELECT `id` FROM `users` WHERE `email`=?", [email], (err, res) =>{
-            if(err) throw err;
-            if(res.length > 0){
-                console.log("E-Mail already in use");
-                return;
-            };
+        if(!config.onlyArabic(username)){
+            return "only arabic characters are accepted";
+        }
 
-            db.query("SELECT `id` FROM `users` WHERE `username`=?", [username], (err, res) =>{
-                if(err) throw err;
+        return new Promise((resolve, reject) => {
+            db.query("SELECT `id` FROM `users` WHERE `username`=?", [username], (err, res) => {
+                if(err) reject(err);
                 if(res.length > 0){
-                    console.log("Account already exists");
-                    return;
-                };
-    
-                db.query("INSERT INTO `users` (`username`, `password`, `email`) VALUES (?, ?, ?)", [username, md5(password), email], function(err, res){
-                    if(err) throw err;
-                    console.log("Created new account");
-                });
+                    reject("Username already exists");
+                } else {
+                    db.query("INSERT INTO `users` (`username`, `email`, `password`, `createdAt`, `updatedAt`) VALUES (?, ?, ?, ?, ?)", [username, email, md5(password), new Date(), new Date()], (err, res) => {
+                        if(err) reject(err);
+                        resolve("User " + username + " has registered");
+                    });
+                }
             });
         });
-    };
-};
+    }
 
-//const accountRegister = new UserRegister("IAN", "123456", "123456", "j@il.com");
+    async get(id) {
+        return new Promise((resolve, reject) => {
+            db.query("SELECT `id`, `username`, `email`, `createdAt`, `updatedAt` FROM `users` WHERE `id`=?", [id], (err, res) => {
+                if(err) reject(err);
+                if(res.length > 0){
+                    this.id = res[0].id;
+                    this.username = res[0].username;
+                    this.email = res[0].email;
+                    this.createdAt = res[0].createdAt;
+                    this.updatedAt = res[0].updatedAt;
+                    resolve(this);
+                } else {
+                    reject("User not found");
+                }
+            });
+        });
+    }
+};
