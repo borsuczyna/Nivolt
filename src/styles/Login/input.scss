@@ -6,10 +6,16 @@
     height: 2em;
     background-color: rgba(14, 14, 14, 0.202);
     padding: 1em;
-    color: white;
+    color: rgba(255, 255, 255, 0.742);
     font-size: 1em;
+    margin-block: 0.5em;
 
     &::placeholder {
-        color: rgba(255, 255, 255, 0.5);
+        color: rgba(255, 255, 255, 0.1);
     }
+}
+
+label {
+    position: relative;
+    top: -30px;
 }

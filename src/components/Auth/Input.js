@@ -1,6 +1,9 @@
 function Input({ placeholder }) {
     return (
-        <input type="text" placeholder={placeholder} className="auth-input" />
+        <div className="input-element">
+            <input type="text" className="auth-input" />
+            <label>{placeholder}</label>
+        </div>
     );
 }
 

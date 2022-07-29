@@ -11,13 +11,11 @@ function Auth() {
         <Block>
             <Top>
                 <Waves/>
-                <img src={Logo} alt="logo" id="brand-logo"/>
+                <img src={Logo} alt='logo' id='brand-logo'/>
             </Top>
             <Form>
-                Username
-                <Input placeholder="Username"/>
-                Password
-                <Input placeholder="Password"/>
+                <Input placeholder='Username'/>
+                <Input placeholder='Password'/>
             </Form>
             <Button>LOGIN</Button>
         </Block>
