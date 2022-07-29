@@ -10,3 +10,8 @@ wrongReqeust = (req, res) => {
 }
 
 app.all('/', wrongReqeust);
+
+//integrating scripts
+require('./src/config.js');
+require('./src/db.js');
+require('./src/account.js');
