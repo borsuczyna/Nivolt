@@ -1,7 +1,9 @@
 function Block({ children }) {
     return (
         <div id="auth-block">
-            {children}
+            <div id="auth-inner">
+                {children}
+            </div>
         </div>
     );    
 }
