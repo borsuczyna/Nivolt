@@ -1,6 +1,6 @@
 #auth-button {
     background-color: rgb(87, 14, 169);
-    border-radius: 0 0 1.5em 1.5em;
+    border-radius: 0 0 1em 1em;
     width: 100%;
     opacity: 1;
     border: none;
@@ -10,6 +10,7 @@
     font-size: 1.2em;
     // line-height: 4em;
     transition: background-color 0.1s ease-in-out;
+    cursor: pointer;
 }
 
 #auth-button:hover {

@@ -1,13 +1,12 @@
 const db = require('./db').connection;
 const jwt = require('jsonwebtoken');
-const bcrypt = require('bcryptjs');
 const config = require('./config');
 const md5 = require('md5');
 
 class UserLogin{
-    constructor(usernameOrEmail, password){
+    constructor (usernameOrEmail, password){
         if(!usernameOrEmail || !password){
-            return console.log("Please fill out all data");
+            return "Please fill out all data";
         };
 
         var fieldSearch = "username";
@@ -16,19 +15,21 @@ class UserLogin{
         }
 
         if(!config.onlyArabic(usernameOrEmail) && fieldSearch != 'email'){
-            return console.log("only arabic characters are accepted");
+            return "only arabic characters are accepted";
         };
 
-        db.query("SELECT `id`, `username`, `password` FROM `users` WHERE " + fieldSearch + "=?", [usernameOrEmail], (err, res) => {
-            if(err) throw err;
-            
-            if(md5(password) == res[0].password){
-                var token = jwt.sign({id: res[0].id, username: res[0].username}, config.secret_token, {
-                    expiresIn: 86400 
-                });
-                console.log("User " + res[0].username + " has logged in");
-                return token;
-            };
+        new Promise((resolve, reject) => {
+            db.query("SELECT `id`, `username`, `password` FROM `users` WHERE " + fieldSearch + "=?", [usernameOrEmail], (err, res) => {
+                if(err) reject(err);
+                
+                if(md5(password) == res[0].password){
+                    var token = jwt.sign({id: res[0].id, username: res[0].username}, config.secret_token, {
+                        expiresIn: 86400 
+                    });
+                    // console.log("User " + res[0].username + " has logged in");
+                    resolve(token);
+                };
+            });
         });
     };
 };

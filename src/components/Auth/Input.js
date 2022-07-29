@@ -1,7 +1,7 @@
-function Input({ placeholder }) {
+function Input({ placeholder, type }) {
     return (
         <div className="input-element">
-            <input type="text" className="auth-input" />
+            <input type={type || "text"} className="auth-input" placeholder=" " />
             <label>{placeholder}</label>
         </div>
     );
